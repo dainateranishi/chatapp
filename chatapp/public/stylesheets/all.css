@@ -1,0 +1,21 @@
+/*
+ * 画面全体に関する設定
+ */
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+li {
+  list-style: none;
+}
+
+:root {
+    --dark-color-a: #667aff;
+    --dark-color-b: #7386ff;
+    --light-color: #e6e9ff;
+    --success-color: #5cb85c;
+    --error-color: #d9534f;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    background: var(--light-color);
+}

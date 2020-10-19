@@ -1,0 +1,218 @@
+<div class="contain">
+
+    <div class="sidebar">
+        <div class="room">
+            <h5>Chat Room</h5>
+            <ul class="room-list">
+                <li><a href="javascript:changeRoom('JavaScript');">JavaScript</a></li>
+                <li><a href="javascript:changeRoom('Python');">Python</a></li>
+                <li><a href="javascript:changeRoom('PHP');">PHP</a></li>
+                <li><a href="javascript:changeRoom('C#');">C#</a></li>
+                <li><a href="javascript:changeRoom('Ruby');">Ruby</a></li>
+                <li><a href="javascript:changeRoom('Java');">Java</a></li>
+            </ul>
+        </div>
+        <div class="member">
+            <h5 class="mt-5">Direct Message</h5>
+            <ul id="member-list">
+            </ul>
+        </div>
+        <div class="server">
+            <ul id="server-thread">
+            </ul>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="group">
+            <div class="group-main">
+                <h2 class="group-name" id="group-name" name="group-name">{{ room }}</h2>
+                <ul id="room-member-list">
+                </ul>
+            </div>
+            <div class="room-exit">
+                <input type="button" value="退室する" class="common-button room-exit_button room-btn" onclick="exit();">
+            </div>
+        </div>
+
+        <div class="calender">
+            <div class="preweek">
+                <input class="simple-button-last" type="button" value="⇐ Last week" onclick="MoveWeek(this);">
+            </div>
+            <table class="kakoi">
+                <tr class="days">
+                    <td class="youbi">mon</td>
+                    <td class="youbi">tue</td>
+                    <td class="youbi">wed</td>
+                    <td class="youbi">thu</td>
+                    <td class="youbi">fri</td>
+                    <td class="youbi">sat</td>
+                    <td class="youbi">sun</td>
+                </tr>
+                <tr>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule0" class="schedule"></div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div  id="schedule1" class="schedule">
+                        </div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule2" class="schedule"></div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule3" class="schedule"></div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule4" class="schedule"></div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule5" class="schedule"></div>
+                    </td>
+                    <td onclick="popSchedule();">
+                        <p class="date"></p>
+                        <div id="schedule6" class="schedule"></div>
+                    </td>
+                </tr>
+            </table>
+            <div class="nexweek">
+                <input class="simple-button-next" type="button" value="Next week ⇒" onclick="MoveWeek(this);">
+            </div>
+        </div>
+
+        <div class="chat">
+            <div class="timeline">
+                <div class="chat-title">
+                    <h4>TimeLine</h4>
+                    <input id="tlsort" type="button" value="新しいもの順" class="common-button room-memo_button butn"
+                        onclick="OnReverse('tl');">
+                </div>
+                <div class="chat-message">
+                    <div id="tlthread"></div>
+                </div>
+
+                <div class="chat-text">
+                    <form method="post" action="/" id="room">
+
+                        <div class="user">
+                            <div class="room-login_user">
+                                <input id="tluserName" type="hidden" value={{ userName }}>
+                                <input id="tlroom" type="hidden" value={{ room }}>
+                            </div>
+                        </div>
+
+                        <div class="room-message">
+                            <textarea id="tlmessage" rows="4" class="room-message_textarea"
+                                placeholder="投稿文を入力してください"></textarea>
+                            <!--onkeypress="publish(event.keyCode);" -->
+                        </div>
+                        <div class="room-submit">
+                            <input id="tlpost" type="button" value="投稿"
+                                class="common-button room-publish_button room-btn" onclick="timelinePublish();">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="groupchat">
+                <div class="chat-title">
+                    <h4>GroupChat</h4>
+                    <input id="grsort" type="button" value="新しいもの順" class="common-button room-memo_button butn"
+                        onclick="OnReverse('gr');">
+                </div>
+
+                <div class="chat-message">
+                    <div id="grthread"></div>
+                </div>
+
+                <div class="chat-text">
+                    <form method="post" action="/" id="group-chat-form">
+                        <div class="user">
+                            <div class="room-login_user">
+                                <input id="gruserName" type="hidden" value={{ userName }}>
+                                <input id="grroom" type="hidden" value={{ room }}>
+                            </div>
+                        </div>
+                        <div class="room-message">
+                            <textarea id="grmessage" rows="4" class="room-message_textarea"
+                                placeholder="投稿文を入力してください"></textarea>
+                            <!--onkeypress="publish(event.keyCode);" -->
+                        </div>
+                        <div class="room-submit">
+                            <input id="grpost" type="button" value="投稿"
+                                class="common-button room-publish_button room-btn" onclick="groupchatPublish();">
+                            <input type="button" value="メモ" class="common-button room-memo_button room-btn"
+                                onclick="memo('gr');">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rightbar">
+        <h4 class="dmroom" id="dmname">Who do you want to talk with?</h4>
+        <div class="dm-message">
+            <div id="dmthread"></div>
+        </div>
+
+        <div class="dmt-text">
+            <form method="post" action="/" id="direct-message-form">
+                <div class="user">
+                    <div class="room-login_user">
+                        <input id="dmuserName" type="hidden" value={{ userName }}>
+                        <input id="dmroom" type="hidden" value={{ room }}>
+                    </div>
+                </div>
+                {{!--<div class="test mt-3">--}}
+                <div class="room-message">
+                    <textarea id="dmmessage" rows="4" class="room-message_textarea"
+                        placeholder="投稿文を入力してください"></textarea>
+                    <!--onkeypress="publish(event.keyCode);" -->
+                </div>
+                <div class="room-submit">
+                    <input id="dmpost" type="button" value="投稿" class="common-button room-publish_button room-btn"
+                        onclick="directMassagePublish();">
+                </div>
+                {{!--</div>--}}
+            </form>
+        </div>
+    </div>
+
+
+    <div id="popSchedule">
+        <div class="index-user_name">
+            <div>
+                <label>日時</label>
+                <input type="text" id="scheduleDate" name="scheduleDate" placeholder="YYYY-MM-DD" class="form-control" required>
+                <label>内容</label>
+                <input type="text" id="userSchedule" name="userSchedule" placeholder="例）：　インターンシップ" class="form-control" required>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success" onclick="registerSchedule()">予定を登録</button>
+        <input type="button" id="close" value="close popup" onclick="popClose();">
+    </div>
+
+
+</div>
+
+
+
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/enter.js"></script>
+<script src="/javascripts/exit.js"></script>
+<script src="/javascripts/changeRoom.js"></script>
+<script src="/javascripts/memo.js"></script>
+<script src="/javascripts/timeline.js"></script>
+<script src="/javascripts/groupchat.js"></script>
+<script src="/javascripts/directMessage.js"></script>
+<script src="/javascripts/helper.js"></script>
+<script src="/javascripts/zeller.js"></script>

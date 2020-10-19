@@ -1,0 +1,42 @@
+<div class="join-container">
+    <header class="join-header">
+        <h1>
+            <i class="fas fa-smile"></i>
+            Let's talk PGLG
+        </h1>
+        <form id="signUp_form" name="signUp_form" method="post" action="/sign_up">
+            <input type="button" value="新規アカウント登録" class="btn btn-warning" onclick="signUp();">
+        </form>
+    </header>
+    <div class="join-main">
+        <form id="logIn_form" name="logIn_form" method="post" action="/room">
+        {{!-- <form id="logIn_form" name="logIn_form" method="post" action="/room2"></form> --}}
+            <div class="index-user_name">
+                <div>
+                    <label for="userName">ユーザ名</label>
+                    <input type="text" id="userName" name="userName" placeholder="ユーザー名" class="form-control" required>
+                    <label for="password">パスワード</label>
+                    <input type="text" id="password" name="password" placeholder="パスワード" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-control">
+                <label for="room">Room</label>
+                <select name="room" id="room">
+                    <option value="JavaScript">JavaScript</option>
+                    <option value="Python">Python</option>
+                    <option value="PHP">PHP</option>
+                    <option value="C#">C#</option>
+                    <option value="Ruby">Ruby</option>
+                    <option value="Java">Java</option>
+                </select>
+            </div>
+            <div class="index-enter">
+                {{!--<input type="button" value="入室する" class="btn btn-success" onclick="enter('logIn');">--}}
+                <button type="submit" class="btn btn-success" onclick="enter('logIn');">入室する</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/index.js"></script>

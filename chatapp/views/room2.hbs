@@ -1,0 +1,148 @@
+<div class="contain">
+
+    <div class="sidebar">
+        <div class="room">
+            <h5>Chat Room</h5>
+            <ul class="room-list">
+                <li><a href="javascript:changeRoom('JavaScript');">JavaScript</a></li>
+                <li><a href="javascript:changeRoom('Python');">Python</a></li>
+                <li><a href="javascript:changeRoom('PHP');">PHP</a></li>
+                <li><a href="javascript:changeRoom('C#');">C#</a></li>
+                <li><a href="javascript:changeRoom('Ruby');">Ruby</a></li>
+                <li><a href="javascript:changeRoom('Java');">Java</a></li>
+            </ul>
+        </div>
+        <div class="member">
+            <h5>Direct Message</h5>
+            <ul id="member-list">
+            </ul>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="group">
+            <div class="group-main">
+                <h2 class="group-name" id="group-name" name="group-name"> {{ room }} : </h2>
+                {{!-- 表示 --}}
+                <ul id="room-member-list">
+                </ul>
+            </div>
+            <div class="room-exit">
+                <input type="button" value="退室する" class="common-button room-exit_button room-btn" onclick="exit();">
+            </div>
+        </div>
+
+        <div class="chat">
+            <div class="timeline">
+                <div class="chat-title">
+                    <h4>TimeLine</h4>
+                    <input id="tlsort" type="button" value="新しいもの順" class="common-button room-memo_button butn"
+                        onclick="OnReverse('tl');">
+                </div>
+                <div class="chat-message">
+                    <div id="tlthread"></div>
+                </div>
+
+                <div class="chat-text">
+                    <form method="post" action="/" id="room">
+
+                        <div class="user">
+                            <div class="room-login_user">
+                                <input id="tluserName" type="hidden" value={{ userName }}>
+                                <input id="tlroom" type="hidden" value={{ room }}>
+                            </div>
+                        </div>
+
+                        <div class="room-message">
+                            <textarea id="tlmessage" rows="4" class="room-message_textarea"
+                                placeholder="投稿文を入力してください"></textarea>
+                            <!--onkeypress="publish(event.keyCode);" -->
+                        </div>
+                        <div class="room-submit">
+                            <input id="tlpost" type="button" value="投稿"
+                                class="common-button room-publish_button room-btn" onclick="timelinePublish();">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="groupchat">
+                <div class="chat-title">
+                    <h4>GroupChat</h4>
+                    <input id="grsort" type="button" value="新しいもの順" class="common-button room-memo_button butn"
+                        onclick="OnReverse('gr');">
+                </div>
+
+                <div class="chat-message">
+                    <div id="grthread"></div>
+                </div>
+
+                <div class="chat-text">
+                    <form method="post" action="/" id="group-chat-form">
+                        <div class="user">
+                            <div class="room-login_user">
+                                <input id="gruserName" type="hidden" value={{ userName }}>
+                                <input id="grroom" type="hidden" value={{ room }}>
+                            </div>
+                        </div>
+                        <div class="room-message">
+                            <textarea id="grmessage" rows="4" class="room-message_textarea"
+                                placeholder="投稿文を入力してください"></textarea>
+                            <!--onkeypress="publish(event.keyCode);" -->
+                        </div>
+                        <div class="room-submit">
+                            <input id="grpost" type="button" value="投稿"
+                                class="common-button room-publish_button room-btn" onclick="groupchatPublish();">
+                            <input type="button" value="メモ" class="common-button room-memo_button room-btn"
+                                onclick="memo('gr');">
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="rightbar">
+        <h4 class="dmroom" id = "dmname">Who do you want to talk with?</h4>
+        <div class="dm-message">
+            <div id="dmthread"></div>
+        </div>
+
+        <div class="dmt-text">
+            <form method="post" action="/" id="direct-message-form">
+                <div class="user">
+                    <div class="room-login_user">
+                        <input id="dmuserName" type="hidden" value={{ userName }}>
+                        <input id="dmroom" type="hidden" value={{ room }}>
+                    </div>
+                </div>
+                <div class="room-message">
+                    <textarea id="dmmessage" rows="4" class="room-message_textarea"
+                        placeholder="投稿文を入力してください"></textarea>
+                    <!--onkeypress="publish(event.keyCode);" -->
+                </div>
+                <div class="room-submit">
+                    <input id="dmpost" type="button" value="投稿" class="common-button room-publish_button room-btn"
+                        onclick="directMassagePublish();">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script src="/javascripts/socket.js"></script>
+<script src="/javascripts/enter.js"></script>
+<script src="/javascripts/exit.js"></script>
+<script src="/javascripts/changeRoom.js"></script>
+{{!-- <script src="/javascripts/publish.js"></script> --}}
+<script src="/javascripts/memo.js"></script>
+<script src="/javascripts/timeline.js"></script>
+<script src="/javascripts/groupchat.js"></script>
+<script src="/javascripts/directMessage.js"></script>
+<script src="/javascripts/helper.js"></script>
